@@ -102,5 +102,12 @@ if ! [ -z ${PGID_ADMINS[@]} ]; then
 		echo "WARNING: Set $staff PrimaryGroupID to 20"
 	done
 fi
-	
+
+# In case someone was really cheeky and enabled root
+if dscl . -read /Users/root Password | grep -q '\*\*\*\*\*\*\*\*' || dscl . -read /Users/root AuthenticationAuthority | grep -q -e 'ShadowHash' -e 'SecureToken' -e 'Kerberosv5';then
+	echo "$?"
+	echo "WARNING: root user was enabled ... Disabling."
+	dscl . -delete /Users/root AuthenticationAuthority
+	dscl . -change /Users/root Password "********" "*"
+fi
 exit 0
