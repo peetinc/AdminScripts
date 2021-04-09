@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Disabled</key>
+	<false/>
+	<key>Label</key>
+	<string>com.peetinc.RevokePrivileges</string>
+	<key>Program</key>
+	<string>/Library/Application Support/RevokePrivileges/RevokePrivileges.sh</string>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>WatchPaths</key>
+	<array>
+		<string>/var/db/dslocal/nodes/Default/groups/admin.plist</string>
+	</array>
+</dict>
+</plist>

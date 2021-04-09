@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if launchctl list | grep consulting.artichoke.RestoreAdmins; then
+	launchctl unload /Library/LaunchDaemons/consulting.artichoke.RestoreAdmins.plist
+fi
+
+exit 0
