@@ -5,11 +5,9 @@
 	<key>Disabled</key>
 	<false/>
 	<key>Label</key>
-	<string>com.peetinc.RevokePrivileges</string>
+	<string>com.peetinc.RevokePrivilegesAgent</string>
 	<key>Program</key>
 	<string>/Library/Application Support/RevokePrivileges/RevokePrivileges.sh</string>
-	<key>RunAtLoad</key>
-	<true/>
 	<key>WatchPaths</key>
 	<array>
 		<string>/var/db/dslocal/nodes/Default/groups/admin.plist</string>

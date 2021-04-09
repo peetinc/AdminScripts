@@ -1,6 +1,6 @@
 #!/bin/bash
 
-launchctl load /Library/LaunchDaemons/consulting.artichoke.RestoreAdmins.plist
-"/Library/Application Support/Artichoke/RestoreAdmins.sh" 0
+launchctl load /Library/LaunchDaemons/com.peetinc.RevokePrivileges.plist
+"/Library/Application Support/RevokePrivileges/RevokePrivileges.sh" 0
 
 exit 0

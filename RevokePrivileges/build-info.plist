@@ -5,7 +5,7 @@
 	<key>distribution_style</key>
 	<false/>
 	<key>identifier</key>
-	<string>consulting.artichoke.RevokePrivileges</string>
+	<string>com.peetinc.RevokePrivileges</string>
 	<key>install_location</key>
 	<string>/</string>
 	<key>name</key>

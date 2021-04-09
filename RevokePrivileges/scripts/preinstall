@@ -1,7 +1,10 @@
 #!/bin/bash
 
-if launchctl list | grep consulting.artichoke.RestoreAdmins; then
-	launchctl unload /Library/LaunchDaemons/consulting.artichoke.RestoreAdmins.plist
+if launchctl list | grep com.peetinc.RevokePrivileges; then
+	launchctl unload /Library/LaunchDaemons/com.peetinc.RevokePrivileges.plist
+fi
+if launchctl list | grep com.peetinc.LoginWindow.RevokePrivileges; then
+	launchctl unload /Library/LaunchDaemons/com.peetinc.LoginWindow.RevokePrivileges.plist
 fi
 
 exit 0
