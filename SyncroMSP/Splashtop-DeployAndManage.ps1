@@ -30,7 +30,6 @@ $MyCSRTeamName = "Your Deployment Team Name" #Found in Status window of Deployed
 $Generic_DeployCode = "123456789012345678" #A Generic Deploy Code for you Team as fallback
 
 # SyncroMSP variables
-$SyncroSubdomain = "YourSubdomain" #If you don't know this don't use this script
 $Splashtop_ConnectURI_AssetField = "Field Name For SplashtopConnectURI" #Create a "Web link" Custom Asset Field and provide name here
 $SplashtopName_AssetField = "Field Name for Splashtop Computer Name"#Create a "Test field" Custom Asset Field and provide name here
 
@@ -186,7 +185,7 @@ Function Update-ConnectURI{
     Write-Output "Updating $ProgramName URI for $CloudComputerName ..."
     Write-Output "From $Splashtop_ConnectURI_Syncro"
     Write-Output "To $Splashtop_ConnectURI_Local"
-    Set-Asset-Field -Subdomain "$SyncroSubdomain" -Name "$Splashtop_ConnectURI_AssetField" -Value "$Splashtop_ConnectURI_Local"
+    Set-Asset-Field -Name "$Splashtop_ConnectURI_AssetField" -Value "$Splashtop_ConnectURI_Local"
     } else {
     Write-Output "$ProgramName URI`: $Splashtop_ConnectURI_Syncro"
     }
@@ -203,7 +202,7 @@ Function Update-SplashtopName{
   }
   if ($Splashtop_Name_Syncro -ne $CloudComputerName){
     Write-Host "Updating Splashtop_Name from $Splashtop_Name_Syncro to $CloudComputerName."
-    Set-Asset-Field -Subdomain "$SyncroSubdomain" -Name "$SplashtopName_AssetField" -Value "$CloudComputerName"
+    Set-Asset-Field -Name "$SplashtopName_AssetField" -Value "$CloudComputerName"
     }
   Write-Output "$ProgramName Computer Name: $CloudComputerName"
 }
