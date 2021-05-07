@@ -1,5 +1,5 @@
 <#
-# Script Name:              Uninstall-OracleJavaJRE.ps1
+# Script Name:              Uninstall-OLD_OracleJavaJRE.ps1
 # Script Author:            Peet McKinney @ Artichoke Consulting
 
 # Changelog                 
@@ -21,7 +21,7 @@ Import-Module $env:SyncroModule
 ###############################
 
 ## Variables (Must Set)
-$KeepVersion="8.0.2910.11" #Current JRE 8 as of 2021.05.06 
+$KeepVersion="8.0.291" #Current JRE 8 as of 2021.05.06 
 
 ## Variables (Runtime)
 $CurrentOracleJava=$(Get-WmiObject -Class Win32_Product -Filter "Vendor like 'Oracle%%' and Name like 'Java%%' and NOT Name like 'Java Auto Updater' and Version >= '$KeepVersion'")
@@ -43,7 +43,5 @@ if ((!($CurrentOracleJava)) -and ($OldOracleJavaAutoUpdater)){
 }
 if ($CurrentOracleJava){
   Write-Output "Currently installed versions of Oracle Java JRE:"
-  ForEach ($version in $CurrentOracleJava.Name) {
   Write-Output $CurrentOracleJava.Name
-  }
 } 
