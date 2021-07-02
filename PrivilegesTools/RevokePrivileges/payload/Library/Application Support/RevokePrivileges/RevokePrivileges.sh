@@ -6,7 +6,7 @@
 # Script Author:            Peet McKinney @ Artichoke Consulting
 
 # Changelog                 
-2020.23.07                 Initial Checkin                 PJM
+2021.07.02                 Initial Checkin                 PJM
 
 #Desription
 This script revoke Privilige.app enabled user from admin group. The script accepts 1 arguemnt for $TIMER. The number of seconds before executing.
@@ -31,8 +31,8 @@ if [ $# -ne 1 ]; then
 fi
 
 ### Functions
-# This is a quick check if string is in the array (usage -- array_contains ARRAY_NAME SEARCH_STRING)
-array_contains () { 
+# This is a quick check if string is in the array (usage -- Check-Array ARRAY_NAME SEARCH_STRING)
+Check-Array () { 
     local array="$1[@]"
     local seeking=$2
     local in=1
@@ -46,13 +46,18 @@ array_contains () {
 }
 
 # This checks all . /Users against ./Groups/admin to see if they're part of the group.
-# (usage -- members GROUPNAME)
-members () 
-{ dscl . -list /Users | \
-	while read user 
-		do printf "$user "
-		dsmemberutil checkmembership -U "$user" -G "$*"
-	done | grep "is a member" | cut -d " " -f 1; 
+# (usage -- Get-LocalMembers GROUPNAME)
+Get-LocalMembers () { 
+	if ! dscl . list /Groups/"$1" >> /dev/null 2>&1;then
+		echo "A Local Group with the name $1 does not exist."
+		exit 1
+	else
+		dscl . -list /Users | \
+		while read user 
+			do printf "$user "
+			dsmemberutil checkmembership -U "$user" -G "$1"
+		done | grep "is a member" | cut -d " " -f 1; 
+	fi
 }
 
 
@@ -61,12 +66,12 @@ members ()
 sleep $TIMER
 
 # We need to make sure to not de-privilege $FIRST_ADMIN
-if [ -f "/Applications/Privileges.app/Contents/Resources/PrivilegesCLI" ] && ! array_contains VALID_ADMINS $CONOLE_USER; then
+if [ -f "/Applications/Privileges.app/Contents/Resources/PrivilegesCLI" ] && ! Check-Array VALID_ADMINS $CONOLE_USER; then
 	su "$CONOLE_USER" -c "/Applications/Privileges.app/Contents/Resources/PrivilegesCLI --remove"
 fi
 
 # Check local users for membership in admin group.
-MEMBERS_ADMIN=($(members admin))
+MEMBERS_ADMIN=($(Get-LocalMembers admin))
 
 # Check admin group for users
 dscl -plist . read /groups/admin > /tmp/admin.plist

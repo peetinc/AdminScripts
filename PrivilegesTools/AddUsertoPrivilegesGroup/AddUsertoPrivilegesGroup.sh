@@ -1,9 +1,22 @@
 #!/bin/bash
 
+: <<'CommentBlock-StartandEND'
+
+# Script Name:              CreateGroup and AddUsertoGroup.sh
+# Script Author:            Peet McKinney @ Artichoke Consulting
+
+# Changelog                 
+2021.07.02                 Initial Checkin                 PJM
+
+#Desription
+This script will create a hard-coded local group and add a $1 supplied user to the group.
+		
+CommentBlock-StartandEND
+
 # Ensure that local "Privileges Users" group exists
 GROUP="_sap-privs"
 GROUP_REALNAME="Privileges Users"
-CONOLE_USER=$(stat -f "%Su" /dev/console)
+HIDDEN=0 #Hidden=1, Visible=0
 USER_NAME=$1
 
 # Functions
@@ -30,7 +43,7 @@ CreateNewGroup () {
 	    dscl . append /Groups/"$1" RealName "$GROUP_REALNAME"
 	    dscl . append /Groups/"$1" gid "$NEW_GID"
 	    dscl . append /Groups/"$1" passwd "*"
-	    dscl . append /Groups/"$1" IsHidden 0
+	    dscl . append /Groups/"$1" IsHidden "$HIDDEN"
 }
 
 AddUserToGroup () {
